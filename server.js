@@ -88,7 +88,15 @@ function getTimestampJSON(timestamp){
 		// Date.getTime() returns the unix timestamp,
 		// if it where an invalid date, this would be NaN
 		result.unix = date.getTime();
-		result.natural = 'We will get here eventually!';
+    result.natural = getNaturalDate(date);
 	}
+  // We return the value, whatever it may be.
+	return result;
 
+}
+
+function getNaturalDate(date) {
+	var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'Obtober', 'November', 'December'];
+ 
+	return months[date.getMonth()] + ' ' + date.getDate() + ', ' + date.getFullYear();
 }
