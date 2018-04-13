@@ -44,18 +44,7 @@ app.route('/:timestamp')
     .get(function(req, res) {
     
       let timestamp = req.params.timestamp;
-      if(!timestamp.includes(',', 0)){
-        // unix timestamp
-        let unix_timestamp = new Date(timestamp*1000).getUnixTime();
-        
-      
-      }else {
-        // natural language date
-      }
-      res.send({unix: ,natural: }); 
-      
-      
-		  r
+      res.json(getTimestampJSON(timestamp));
     })
 
 // Respond not found to all the wrong routes
@@ -77,3 +66,29 @@ app.listen(process.env.PORT, function () {
   console.log('Node.js listening ...');
 });
 
+function getTimestampJSON(timestamp){
+  // First, we handle the unix timestamps. Path parameters come in as text
+	// rather than numbers, so we'll attempt to parse them.
+  var result = {
+		unix: null,
+		natural: null
+	};
+  
+  var date;
+	if (!isNaN(parseInt(timestamp))) {
+		// This means that the parsed integer is NOT a
+		// NaN (not a number) value, in other words: it's a valid number.
+		date = new Date(parseInt(timestamp));
+	} else {
+		// Timestamp is not a valid number, we'll create a Date object
+		// and then check if is valid before we return it
+		date = new Date(timestamp);
+	}
+  if (!isNaN(date.getTime())) {
+		// Date.getTime() returns the unix timestamp,
+		// if it where an invalid date, this would be NaN
+		result.unix = date.getTime();
+		result.natural = 'We will get here eventually!';
+	}
+
+}
