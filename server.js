@@ -41,6 +41,12 @@ app.route('/')
 
 app.route('/:timestamp')
     .get(function(req, res) {
+      let timestamp = req.params.timestamp;
+      if(timestamp.includes('%', 0)){
+        let dateparts = timestamp.slice();
+      }
+      if(timestamp === ){
+      } 
       let unix_timestamp = new Date(req.params.timestamp).getUnixTime();
       
       
