@@ -9,6 +9,7 @@
 var fs = require('fs');
 var express = require('express');
 var app = express();
+var chrono = require('chrono-node');
 
 if (!process.env.DISABLE_XORIGIN) {
   app.use(function(req, res, next) {
@@ -41,16 +42,20 @@ app.route('/')
 
 app.route('/:timestamp')
     .get(function(req, res) {
+    
       let timestamp = req.params.timestamp;
-      if(timestamp.includes('%', 0)){
-        let dateparts = timestamp.slice();
+      if(!timestamp.includes(',', 0)){
+        // unix timestamp
+        let unix_timestamp = new Date(timestamp*1000).getUnixTime();
+        
+      
+      }else {
+        // natural language date
       }
-      if(timestamp === ){
-      } 
-      let unix_timestamp = new Date(req.params.timestamp).getUnixTime();
+      res.send({unix: ,natural: }); 
       
       
-		  res.sendFile(process.cwd() + '/views/index.html');
+		  r
     })
 
 // Respond not found to all the wrong routes
