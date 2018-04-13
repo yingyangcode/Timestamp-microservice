@@ -41,6 +41,7 @@ app.route('/')
 
 app.route('/:timestamp')
     .get(function(req, res) {
+      let timestamp = req.params;
 		  res.sendFile(process.cwd() + '/views/index.html');
     })
 
